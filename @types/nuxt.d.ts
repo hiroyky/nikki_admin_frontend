@@ -3,4 +3,3 @@ declare module 'nuxt' {
     const Builder: any
     export { Nuxt, Builder }
   }
-  

@@ -1,5 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
+import dotenv from 'dotenv'
+import basicAuthToken from 'basic-auth-token'
+dotenv.config()
 
 const config: NuxtConfig = {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
@@ -36,10 +39,12 @@ const config: NuxtConfig = {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/dotenv'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    '@nuxtjs/apollo'
   ],
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
@@ -63,6 +68,18 @@ const config: NuxtConfig = {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:8080/admin/query',
+        httpLinkOptions: {
+          headers: {
+            authorization: 'Basic ' + basicAuthToken(process.env.BASIC_AUTH_USERNAME, process.env.BASIC_AUTH_PASSWORD)
+          }
+        }
+      }
+    }
   }
 }
 

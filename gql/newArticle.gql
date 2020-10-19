@@ -1,0 +1,19 @@
+mutation NewArticleGql(
+  $title: String!
+  $body: String!
+  $description: String!
+  $publishStatus: Int!
+  $thumbnailImage: String!
+  $postedAt: Time!
+  ) {
+  newArticle(input: {
+  title: $title,
+  body: $body,
+  description: $description,
+  publishStatus: $publishStatus,
+  thumbnailImage: $thumbnailImage,
+  postedAt: $postedAt
+  }) {
+    id
+  }
+}
